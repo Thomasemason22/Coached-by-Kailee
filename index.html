@@ -137,7 +137,7 @@
 
       .sidebar-gallery {
         position: absolute;
-        inset: 0;
+        inset: var(--sidebar-copy-height) 0 0;
         z-index: 1;
         background: linear-gradient(145deg, #ffd8e7, #fff8fb);
       }
@@ -152,18 +152,17 @@
         display: block;
         opacity: 0;
         background: linear-gradient(145deg, #ffd8e7, #fff8fb);
-        clip-path: inset(var(--sidebar-copy-height) 0 0 0);
       }
 
       .sidebar-gallery img:nth-child(1) {
         object-fit: cover;
-        object-position: center 54%;
+        object-position: center 50%;
         opacity: 1;
       }
 
       .sidebar-gallery img:nth-child(2) {
         object-fit: cover;
-        object-position: center 54%;
+        object-position: center 50%;
         animation: galleryFadeSecond 24s infinite;
       }
 
