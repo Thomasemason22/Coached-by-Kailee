@@ -124,7 +124,7 @@
         z-index: 0;
         content: "";
         background:
-          linear-gradient(rgba(127, 35, 79, 0.18), rgba(127, 35, 79, 0.72)),
+          linear-gradient(rgba(127, 35, 79, 0.12), rgba(127, 35, 79, 0.68)),
           var(--sidebar-photo) center top / cover;
       }
 
@@ -317,6 +317,35 @@
         grid-column: 1 / -1;
       }
 
+      .form-section {
+        display: grid;
+        gap: 16px;
+        border-top: 1px solid var(--line);
+        padding-top: 20px;
+      }
+
+      .form-section:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      .section-title {
+        margin: 0;
+        color: var(--rose);
+        font-size: 0.82rem;
+        font-weight: 900;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .helper {
+        margin-top: -2px;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 650;
+        line-height: 1.45;
+      }
+
       .choices {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -400,6 +429,21 @@
         font-weight: 800;
       }
 
+      .success-box {
+        display: none;
+        border: 1px solid #b9e6cd;
+        border-radius: 8px;
+        padding: 16px;
+        color: #2f6148;
+        background: #effaf4;
+        font-weight: 800;
+        line-height: 1.5;
+      }
+
+      .success-box.is-visible {
+        display: block;
+      }
+
       .tracker {
         margin-top: 30px;
         padding: 24px;
@@ -473,6 +517,34 @@
         font-weight: 800;
       }
 
+      .site-footer {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 28px 4px 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 650;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .footer-links a {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 9px 12px;
+        color: var(--berry);
+        background: rgba(255, 255, 255, 0.72);
+        text-decoration: none;
+        font-weight: 800;
+      }
+
       @media (max-width: 920px) {
         .hero {
           grid-template-columns: 1fr;
@@ -480,6 +552,7 @@
 
         .intro {
           min-height: 520px;
+          background-position: center top;
         }
       }
 
@@ -503,6 +576,17 @@
 
         .intro {
           min-height: 560px;
+          padding: 18px;
+        }
+
+        .intro::before {
+          background:
+            linear-gradient(rgba(127, 35, 79, 0.1), rgba(127, 35, 79, 0.72)),
+            var(--sidebar-photo) center top / cover;
+        }
+
+        .intro h1 {
+          font-size: clamp(2rem, 12vw, 3.5rem);
         }
 
         .intro-stat,
@@ -574,102 +658,240 @@
           </div>
 
           <form id="application-form">
-            <div class="grid">
-              <label>
-                Full name
-                <input name="name" autocomplete="name" required placeholder="Your name">
-              </label>
-              <label>
-                Email
-                <input name="email" type="email" autocomplete="email" required placeholder="you@example.com">
-              </label>
-              <label>
-                Phone
-                <input name="phone" type="tel" autocomplete="tel" placeholder="Optional">
-              </label>
-              <label>
-                Instagram
-                <input name="instagram" placeholder="@username">
-              </label>
-              <label>
-                Main goal
-                <select name="goal" required>
-                  <option value="">Choose one</option>
-                  <option>Fat loss</option>
-                  <option>Muscle gain</option>
-                  <option>Strength</option>
-                  <option>Healthy habits</option>
-                  <option>Body recomposition</option>
-                  <option>Event or photoshoot prep</option>
-                </select>
-              </label>
-              <label>
-                Coaching timeline
-                <select name="timeline" required>
-                  <option value="">Choose one</option>
-                  <option>Ready now</option>
-                  <option>Within 2 weeks</option>
-                  <option>Within 30 days</option>
-                  <option>Just exploring</option>
-                </select>
-              </label>
-              <label>
-                Current training
-                <select name="training" required>
-                  <option value="">Choose one</option>
-                  <option>Beginner</option>
-                  <option>2-3 days per week</option>
-                  <option>4-5 days per week</option>
-                  <option>Advanced</option>
-                  <option>Getting back into it</option>
-                </select>
-              </label>
-              <label>
-                Preferred check-in day
-                <select name="checkin" required>
-                  <option value="">Choose one</option>
-                  <option>Monday</option>
-                  <option>Tuesday</option>
-                  <option>Wednesday</option>
-                  <option>Thursday</option>
-                  <option>Friday</option>
-                  <option>Weekend</option>
-                </select>
-              </label>
+            <div class="success-box" data-success>
+              Thank you for applying. Kailee will review your application and be in touch within 48 hours.
             </div>
 
-            <fieldset class="field-wide">
-              <legend>Commitment level</legend>
-              <div class="choices">
-                <label class="choice">
-                  <input type="radio" name="commitment" value="All in" required>
-                  <span>All in</span>
+            <section class="form-section" aria-labelledby="personal-info">
+              <h3 class="section-title" id="personal-info">Personal info</h3>
+              <div class="grid">
+                <label>
+                  First name *
+                  <input name="firstName" autocomplete="given-name" required placeholder="First name">
                 </label>
-                <label class="choice">
-                  <input type="radio" name="commitment" value="Need structure">
-                  <span>Need structure</span>
+                <label>
+                  Last name *
+                  <input name="lastName" autocomplete="family-name" required placeholder="Last name">
                 </label>
-                <label class="choice">
-                  <input type="radio" name="commitment" value="Unsure">
-                  <span>Unsure</span>
+                <label>
+                  Email address *
+                  <input name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+                </label>
+                <label>
+                  Age *
+                  <input name="age" type="number" min="13" max="100" required placeholder="Age">
+                </label>
+                <label>
+                  Location *
+                  <input name="location" autocomplete="address-level2" required placeholder="City, state">
+                </label>
+                <label>
+                  Instagram handle
+                  <input name="instagram" placeholder="@username">
+                  <span class="helper">Optional - helps me get to know you a little better</span>
                 </label>
               </div>
-            </fieldset>
+            </section>
 
-            <label>
-              What are you struggling with right now?
-              <textarea name="struggle" required placeholder="Tell Kailee what has felt hard or inconsistent lately."></textarea>
-            </label>
+            <section class="form-section" aria-labelledby="your-goals">
+              <h3 class="section-title" id="your-goals">Your goals</h3>
+              <fieldset>
+                <legend>What is your main goal? *</legend>
+                <div class="choices">
+                  <label class="choice">
+                    <input type="radio" name="mainGoal" value="Build muscle & tone up" required>
+                    <span>Build muscle & tone up</span>
+                  </label>
+                  <label class="choice">
+                    <input type="radio" name="mainGoal" value="Lose body fat">
+                    <span>Lose body fat</span>
+                  </label>
+                  <label class="choice">
+                    <input type="radio" name="mainGoal" value="Body recomposition">
+                    <span>Body recomposition</span>
+                  </label>
+                  <label class="choice">
+                    <input type="radio" name="mainGoal" value="Improve overall fitness & health">
+                    <span>Improve overall fitness & health</span>
+                  </label>
+                  <label class="choice">
+                    <input type="radio" name="mainGoal" value="Other">
+                    <span>Other</span>
+                  </label>
+                </div>
+              </fieldset>
 
-            <label>
-              What would make this program feel successful?
-              <textarea name="success" required placeholder="Share the result, feeling, or lifestyle shift you want most."></textarea>
-            </label>
+              <label>
+                Describe your goal in your own words *
+                <textarea name="goalDescription" required placeholder="Tell me what you want to achieve and why it matters to you."></textarea>
+              </label>
+
+              <label>
+                What is your timeframe? *
+                <select name="timeframe" required>
+                  <option value="">Select...</option>
+                  <option>1-3 months</option>
+                  <option>3-6 months</option>
+                  <option>6-12 months</option>
+                  <option>Long-term lifestyle change</option>
+                </select>
+              </label>
+            </section>
+
+            <section class="form-section" aria-labelledby="fitness-history">
+              <h3 class="section-title" id="fitness-history">Fitness history</h3>
+              <fieldset>
+                <legend>How would you describe your current fitness level? *</legend>
+                <div class="choices">
+                  <label class="choice">
+                    <input type="radio" name="fitnessLevel" value="Complete beginner" required>
+                    <span>Complete beginner</span>
+                  </label>
+                  <label class="choice">
+                    <input type="radio" name="fitnessLevel" value="Some experience (less than 1 year)">
+                    <span>Some experience (less than 1 year)</span>
+                  </label>
+                  <label class="choice">
+                    <input type="radio" name="fitnessLevel" value="Intermediate (1-3 years)">
+                    <span>Intermediate (1-3 years)</span>
+                  </label>
+                  <label class="choice">
+                    <input type="radio" name="fitnessLevel" value="Advanced (3+ years)">
+                    <span>Advanced (3+ years)</span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <label>
+                How many days per week can you train? *
+                <select name="trainingDays" required>
+                  <option value="">Select...</option>
+                  <option>2 days</option>
+                  <option>3 days</option>
+                  <option>4 days</option>
+                  <option>5 days</option>
+                  <option>6+ days</option>
+                </select>
+              </label>
+
+              <fieldset>
+                <legend>Where will you be training? *</legend>
+                <div class="choices">
+                  <label class="choice">
+                    <input type="radio" name="trainingLocation" value="Gym" required>
+                    <span>Gym</span>
+                  </label>
+                  <label class="choice">
+                    <input type="radio" name="trainingLocation" value="Home (with equipment)">
+                    <span>Home (with equipment)</span>
+                  </label>
+                  <label class="choice">
+                    <input type="radio" name="trainingLocation" value="Home (no equipment)">
+                    <span>Home (no equipment)</span>
+                  </label>
+                  <label class="choice">
+                    <input type="radio" name="trainingLocation" value="Mix of gym & home">
+                    <span>Mix of gym & home</span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <label>
+                Do you have any injuries or physical limitations?
+                <textarea name="limitations" placeholder="Share anything I should know before building your plan."></textarea>
+              </label>
+            </section>
+
+            <section class="form-section" aria-labelledby="nutrition-lifestyle">
+              <h3 class="section-title" id="nutrition-lifestyle">Nutrition & lifestyle</h3>
+              <fieldset>
+                <legend>How would you describe your current diet? *</legend>
+                <div class="choices">
+                  <label class="choice">
+                    <input type="radio" name="diet" value="No restrictions" required>
+                    <span>No restrictions</span>
+                  </label>
+                  <label class="choice">
+                    <input type="radio" name="diet" value="Vegetarian">
+                    <span>Vegetarian</span>
+                  </label>
+                  <label class="choice">
+                    <input type="radio" name="diet" value="Vegan">
+                    <span>Vegan</span>
+                  </label>
+                  <label class="choice">
+                    <input type="radio" name="diet" value="Gluten free">
+                    <span>Gluten free</span>
+                  </label>
+                  <label class="choice">
+                    <input type="radio" name="diet" value="Other dietary restrictions">
+                    <span>Other dietary restrictions</span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend>Have you tracked macros before? *</legend>
+                <div class="choices">
+                  <label class="choice">
+                    <input type="radio" name="macros" value="Yes, I'm comfortable with it" required>
+                    <span>Yes, I'm comfortable with it</span>
+                  </label>
+                  <label class="choice">
+                    <input type="radio" name="macros" value="I've tried but need guidance">
+                    <span>I've tried but need guidance</span>
+                  </label>
+                  <label class="choice">
+                    <input type="radio" name="macros" value="No, never tried it">
+                    <span>No, never tried it</span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <label>
+                How is your sleep & stress currently?
+                <select name="sleepStress">
+                  <option value="">Select...</option>
+                  <option>Great - well rested & low stress</option>
+                  <option>Average - could be better</option>
+                  <option>Poor - sleep deprived or high stress</option>
+                </select>
+              </label>
+            </section>
+
+            <section class="form-section" aria-labelledby="commitment-mindset">
+              <h3 class="section-title" id="commitment-mindset">Commitment & mindset</h3>
+              <label>
+                What has stopped you from reaching your goals in the past?
+                <textarea name="pastObstacles" placeholder="Consistency, time, nutrition, confidence, accountability, anything that feels relevant."></textarea>
+              </label>
+
+              <label>
+                Why do you want to work with a coach specifically? *
+                <textarea name="coachReason" required placeholder="Tell me why 1:1 coaching feels like the right next step."></textarea>
+              </label>
+
+              <label>
+                On a scale of 1-10, how committed are you right now? *
+                <select name="commitment" required>
+                  <option value="">Select...</option>
+                  <option>10 - fully committed, ready to go</option>
+                  <option>8-9 - very committed</option>
+                  <option>6-7 - motivated but have some doubts</option>
+                  <option>Below 6 - still considering</option>
+                </select>
+              </label>
+
+              <label>
+                Is there anything else you'd like me to know?
+                <textarea name="additionalNotes" placeholder="Add anything else you want Kailee to know."></textarea>
+              </label>
+            </section>
 
             <div class="actions">
-              <button class="primary" type="submit">Submit application</button>
+              <button class="primary" type="submit">Submit my application</button>
               <button class="secondary" type="reset">Clear form</button>
-              <span class="status" role="status" aria-live="polite"></span>
+              <span class="status" role="status" aria-live="polite">I'll be in touch within 48 hours.</span>
             </div>
           </form>
         </section>
@@ -688,6 +910,15 @@
         </div>
         <div class="table-wrap" data-table-wrap></div>
       </section>
+
+      <footer class="site-footer">
+        <span>Coached by Kailee - 1:1 Fitness Coaching</span>
+        <div class="footer-links">
+          <a href="mailto:tom.masonjr03@gmail.com">Email</a>
+          <a href="https://instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+          <a href="#applications">Applications</a>
+        </div>
+      </footer>
     </main>
 
     <script>
@@ -700,19 +931,31 @@
       const clearButton = document.querySelector("[data-clear]");
       const tracker = document.querySelector("#applications");
       const intro = document.querySelector(".intro");
+      const successBox = document.querySelector("[data-success]");
+      const submitButton = form.querySelector(".primary");
+      const submissionEndpoint = "https://formsubmit.co/ajax/tom.masonjr03@gmail.com";
 
       const fields = [
-        "name",
+        "firstName",
+        "lastName",
         "email",
-        "phone",
+        "age",
+        "location",
         "instagram",
-        "goal",
-        "timeline",
-        "training",
-        "checkin",
+        "mainGoal",
+        "goalDescription",
+        "timeframe",
+        "fitnessLevel",
+        "trainingDays",
+        "trainingLocation",
+        "limitations",
+        "diet",
+        "macros",
+        "sleepStress",
+        "pastObstacles",
+        "coachReason",
         "commitment",
-        "struggle",
-        "success"
+        "additionalNotes"
       ];
 
       function getApplications() {
@@ -743,6 +986,10 @@
           .replaceAll("'", "&#039;");
       }
 
+      function applicantName(application) {
+        return `${application.firstName || ""} ${application.lastName || ""}`.trim() || application.name || "";
+      }
+
       function renderApplications() {
         const applications = getApplications();
         count.textContent = applications.length;
@@ -755,10 +1002,12 @@
         const rows = applications
           .map((application) => `
             <tr>
-              <td><strong>${escapeHtml(application.name)}</strong><br>${escapeHtml(application.email)}<br>${escapeHtml(application.phone)}</td>
+              <td><strong>${escapeHtml(applicantName(application))}</strong><br>${escapeHtml(application.email)}<br>Age: ${escapeHtml(application.age || "-")}</td>
               <td>${escapeHtml(application.instagram || "-")}</td>
-              <td><span class="tag">${escapeHtml(application.goal)}</span><br>${escapeHtml(application.timeline)}</td>
-              <td>${escapeHtml(application.training)}<br>${escapeHtml(application.checkin)}</td>
+              <td>${escapeHtml(application.location || "-")}</td>
+              <td><span class="tag">${escapeHtml(application.mainGoal || application.goal)}</span><br>${escapeHtml(application.timeframe || application.timeline)}</td>
+              <td>${escapeHtml(application.fitnessLevel || application.training)}<br>${escapeHtml(application.trainingDays || "")}<br>${escapeHtml(application.trainingLocation || "")}</td>
+              <td>${escapeHtml(application.diet || "-")}<br>${escapeHtml(application.macros || "")}</td>
               <td>${escapeHtml(application.commitment)}</td>
               <td>${escapeHtml(application.submittedAt)}</td>
             </tr>
@@ -771,8 +1020,10 @@
               <tr>
                 <th>Applicant</th>
                 <th>Instagram</th>
+                <th>Location</th>
                 <th>Goal</th>
-                <th>Training</th>
+                <th>Fitness</th>
+                <th>Nutrition</th>
                 <th>Commitment</th>
                 <th>Submitted</th>
               </tr>
@@ -786,7 +1037,29 @@
         return `"${String(value || "").replaceAll('"', '""')}"`;
       }
 
-      form.addEventListener("submit", (event) => {
+      async function sendExternalApplication(application) {
+        const payload = {
+          _subject: `New Coached by Kailee application - ${applicantName(application)}`,
+          _template: "table",
+          _captcha: "false",
+          ...application
+        };
+
+        const response = await fetch(submissionEndpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          throw new Error("External submission failed");
+        }
+      }
+
+      form.addEventListener("submit", async (event) => {
         event.preventDefault();
         const data = new FormData(form);
         const application = Object.fromEntries(fields.map((field) => [field, data.get(field) || ""]));
@@ -801,13 +1074,26 @@
         const applications = [application, ...getApplications()];
         saveApplications(applications);
         renderApplications();
+        statusText.textContent = "Saving application...";
+        submitButton.disabled = true;
+
+        try {
+          await sendExternalApplication(application);
+          statusText.textContent = "Application sent and saved.";
+        } catch {
+          statusText.textContent = "Application saved here. External delivery needs activation.";
+        } finally {
+          submitButton.disabled = false;
+        }
+
+        successBox.classList.add("is-visible");
         form.reset();
-        statusText.textContent = "Application saved.";
         tracker.scrollIntoView({ behavior: "smooth", block: "start" });
       });
 
       form.addEventListener("reset", () => {
-        statusText.textContent = "";
+        statusText.textContent = "I'll be in touch within 48 hours.";
+        successBox.classList.remove("is-visible");
       });
 
       exportButton.addEventListener("click", () => {
