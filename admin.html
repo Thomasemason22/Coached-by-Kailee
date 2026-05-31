@@ -380,7 +380,7 @@
           </div>
         </div>
         <div class="top-actions">
-          <a class="secondary" href="index.html">Client application</a>
+          <a class="secondary" href="https://thomasemason22.github.io/Coached-by-Kailee/">Client application</a>
           <button class="danger" type="button" data-signout>Sign out</button>
         </div>
       </header>
@@ -388,13 +388,18 @@
       <section class="panel login is-visible" data-login>
         <div>
           <h1>Admin access</h1>
-          <p>Enter Kailee's approved admin email. Supabase will send a secure sign-in link.</p>
+          <p>Enter Kailee's approved admin email. Supabase will send a secure 6-digit code.</p>
         </div>
         <label>
           Email
           <input data-email type="email" autocomplete="email" placeholder="Kailee.Mcdonald05@gmail.com">
         </label>
-        <button class="primary" type="button" data-login-button>Send secure link</button>
+        <button class="primary" type="button" data-login-button>Send secure code</button>
+        <label class="code-field" data-code-wrap>
+          6-digit code
+          <input data-code inputmode="numeric" autocomplete="one-time-code" placeholder="123456">
+        </label>
+        <button class="secondary code-field" type="button" data-verify-button>Verify code</button>
         <div class="status" data-login-status></div>
       </section>
 
@@ -447,7 +452,10 @@
       const loginPanel = document.querySelector("[data-login]");
       const dashboard = document.querySelector("[data-dashboard]");
       const emailInput = document.querySelector("[data-email]");
+      const codeInput = document.querySelector("[data-code]");
+      const codeWrap = document.querySelector("[data-code-wrap]");
       const loginButton = document.querySelector("[data-login-button]");
+      const verifyButton = document.querySelector("[data-verify-button]");
       const loginStatus = document.querySelector("[data-login-status]");
       const signoutButton = document.querySelector("[data-signout]");
       const refreshButton = document.querySelector("[data-refresh]");
@@ -465,6 +473,10 @@
 
       let applications = [];
       let selectedId = "";
+
+      document.querySelectorAll(".code-field").forEach((field) => {
+        field.style.display = "none";
+      });
 
       function escapeHtml(value) {
         return String(value || "")
@@ -673,17 +685,45 @@
           return;
         }
 
-        loginStatus.textContent = "Sending secure link...";
+        loginStatus.textContent = "Sending secure code...";
         const { error } = await db.auth.signInWithOtp({
           email,
           options: {
-            emailRedirectTo: window.location.href
+            shouldCreateUser: true
           }
         });
 
+        if (error) {
+          loginStatus.textContent = "Could not send the code. Check the email or Supabase auth settings.";
+          return;
+        }
+
+        document.querySelectorAll(".code-field").forEach((field) => {
+          field.style.display = "grid";
+        });
+        codeInput.focus();
+        loginStatus.textContent = "Check your email for the 6-digit code.";
+      });
+
+      verifyButton.addEventListener("click", async () => {
+        const email = emailInput.value.trim().toLowerCase();
+        const token = codeInput.value.trim();
+
+        if (!email || !token) {
+          loginStatus.textContent = "Enter the email and 6-digit code.";
+          return;
+        }
+
+        loginStatus.textContent = "Verifying code...";
+        const { error } = await db.auth.verifyOtp({
+          email,
+          token,
+          type: "email"
+        });
+
         loginStatus.textContent = error
-          ? "Could not send the link. Check the email or Supabase auth settings."
-          : "Check your email for the secure sign-in link.";
+          ? "That code did not work. Check the code and try again."
+          : "Signed in.";
       });
 
       signoutButton.addEventListener("click", async () => {
