@@ -683,7 +683,7 @@
         });
 
         loginStatus.textContent = error
-          ? "Could not send the link. Check Supabase Auth URL settings."
+          ? `Could not send the link: ${error.message}`
           : "Check your email for the secure sign-in link.";
       });
 
