@@ -124,8 +124,9 @@
         z-index: 0;
         content: "";
         background:
-          linear-gradient(rgba(127, 35, 79, 0.12), rgba(127, 35, 79, 0.68)),
-          var(--sidebar-photo) center top / cover;
+          linear-gradient(rgba(127, 35, 79, 0.06), rgba(127, 35, 79, 0.5)),
+          var(--sidebar-photo) center top / contain no-repeat,
+          linear-gradient(145deg, #ffd8e7, #fff8fb);
       }
 
       .intro::after {
@@ -581,8 +582,9 @@
 
         .intro::before {
           background:
-            linear-gradient(rgba(127, 35, 79, 0.1), rgba(127, 35, 79, 0.72)),
-            var(--sidebar-photo) center top / cover;
+            linear-gradient(rgba(127, 35, 79, 0.08), rgba(127, 35, 79, 0.58)),
+            var(--sidebar-photo) center top / contain no-repeat,
+            linear-gradient(145deg, #ffd8e7, #fff8fb);
         }
 
         .intro h1 {
