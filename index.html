@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coached by Kailee | 1:1 Coaching Application</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #30212a;
+        --muted: #7a6470;
+        --line: #ecd1dd;
+        --paper: #fff8fb;
+        --white: #ffffff;
+        --petal: #ffe7f0;
+        --pink: #e9578e;
+        --rose: #b92f6b;
+        --berry: #7f234f;
+        --mint: #d8f2e6;
+        --shadow: 0 20px 50px rgba(127, 35, 79, 0.14);
+        --sidebar-photo: url("23018F0E-C387-4765-A971-AF0089E464F9.jpeg");
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background:
+          radial-gradient(circle at 12% 8%, rgba(233, 87, 142, 0.22), transparent 30%),
+          linear-gradient(135deg, #fff8fb 0%, #ffe7f0 48%, #fff 100%);
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      .shell {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 28px 0 44px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 0 28px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+
+      .brand-mark {
+        display: grid;
+        width: 44px;
+        height: 44px;
+        place-items: center;
+        border-radius: 50%;
+        color: white;
+        background: linear-gradient(145deg, var(--pink), var(--berry));
+        box-shadow: 0 12px 24px rgba(185, 47, 107, 0.25);
+      }
+
+      .brand small {
+        display: block;
+        margin-top: 2px;
+        color: var(--muted);
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      .dashboard-link {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 10px 14px;
+        color: var(--berry);
+        background: rgba(255, 255, 255, 0.72);
+        font-weight: 700;
+        box-shadow: 0 10px 30px rgba(127, 35, 79, 0.08);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 28px;
+        align-items: stretch;
+      }
+
+      .intro {
+        position: relative;
+        display: flex;
+        min-height: 620px;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+        border-radius: 8px;
+        padding: 34px;
+        color: white;
+        background: linear-gradient(145deg, #ffd8e7, #fff8fb);
+        box-shadow: var(--shadow);
+      }
+
+      .intro::before {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        content: "";
+        background:
+          linear-gradient(rgba(127, 35, 79, 0.18), rgba(127, 35, 79, 0.72)),
+          var(--sidebar-photo) center top / cover;
+      }
+
+      .intro::after {
+        position: absolute;
+        inset: 24px;
+        display: grid;
+        place-items: center;
+        border: 1px dashed rgba(127, 35, 79, 0.24);
+        border-radius: 8px;
+        color: var(--berry);
+        background: rgba(255, 248, 251, 0.86);
+        content: "Add Kailee's sidebar photo to this folder";
+        font-weight: 850;
+        text-align: center;
+      }
+
+      .intro.has-photo::after {
+        display: none;
+      }
+
+      .intro > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .intro-copy {
+        margin: auto 0;
+        opacity: 0.9;
+        text-align: center;
+      }
+
+      .intro h1 {
+        max-width: 500px;
+        margin: 0 auto;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(2.15rem, 4.55vw, 4.35rem);
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      .intro p {
+        max-width: 520px;
+        margin: 20px auto 0;
+        font-size: 1.05rem;
+        line-height: 1.7;
+      }
+
+      .intro-stat {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(14px);
+      }
+
+      .intro-stat div {
+        min-width: 0;
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .intro-stat strong {
+        display: block;
+        font-size: 1.35rem;
+      }
+
+      .intro-stat span {
+        display: block;
+        margin-top: 4px;
+        font-size: 0.78rem;
+        line-height: 1.35;
+        opacity: 0.9;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(18px);
+      }
+
+      .form-panel {
+        padding: 28px;
+      }
+
+      .panel-heading {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 22px;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(1.6rem, 3vw, 2.35rem);
+        line-height: 1.05;
+        letter-spacing: 0;
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        color: var(--rose);
+        font-size: 0.77rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .count-pill {
+        min-width: 96px;
+        border-radius: 999px;
+        padding: 10px 12px;
+        color: var(--berry);
+        background: var(--petal);
+        text-align: center;
+        font-size: 0.85rem;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      form {
+        display: grid;
+        gap: 18px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      label {
+        display: grid;
+        gap: 7px;
+        color: var(--berry);
+        font-size: 0.83rem;
+        font-weight: 800;
+      }
+
+      fieldset {
+        display: grid;
+        gap: 7px;
+        min-width: 0;
+        margin: 0;
+        border: 0;
+        padding: 0;
+      }
+
+      legend {
+        padding: 0;
+        color: var(--berry);
+        font-size: 0.83rem;
+        font-weight: 800;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        min-height: 48px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px 13px;
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.92);
+        outline: none;
+        transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      }
+
+      textarea {
+        min-height: 108px;
+        resize: vertical;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: var(--pink);
+        background: white;
+        box-shadow: 0 0 0 4px rgba(233, 87, 142, 0.14);
+      }
+
+      .field-wide {
+        grid-column: 1 / -1;
+      }
+
+      .choices {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .choice {
+        position: relative;
+      }
+
+      .choice input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .choice span {
+        display: flex;
+        min-height: 48px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 10px;
+        color: var(--muted);
+        background: white;
+        text-align: center;
+        font-size: 0.9rem;
+        font-weight: 800;
+      }
+
+      .choice input:checked + span {
+        border-color: var(--pink);
+        color: var(--berry);
+        background: var(--petal);
+        box-shadow: inset 0 0 0 1px var(--pink);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        margin-top: 2px;
+      }
+
+      .primary,
+      .secondary,
+      .danger {
+        display: inline-flex;
+        min-height: 48px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        padding: 0 18px;
+        font-weight: 850;
+      }
+
+      .primary {
+        border: 0;
+        color: white;
+        background: linear-gradient(145deg, var(--pink), var(--rose));
+        box-shadow: 0 14px 30px rgba(185, 47, 107, 0.25);
+      }
+
+      .secondary {
+        border: 1px solid var(--line);
+        color: var(--berry);
+        background: white;
+      }
+
+      .danger {
+        border: 1px solid #efb8c8;
+        color: #9b1b49;
+        background: #fff0f5;
+      }
+
+      .status {
+        min-height: 24px;
+        color: var(--rose);
+        font-weight: 800;
+      }
+
+      .tracker {
+        margin-top: 30px;
+        padding: 24px;
+      }
+
+      .tracker-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 16px;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: white;
+      }
+
+      table {
+        width: 100%;
+        min-width: 820px;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 13px 14px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        color: var(--berry);
+        background: #fff2f7;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      td {
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      td strong {
+        color: var(--ink);
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+
+      .empty {
+        padding: 26px;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 5px 9px;
+        color: #2f6148;
+        background: var(--mint);
+        font-size: 0.78rem;
+        font-weight: 800;
+      }
+
+      @media (max-width: 920px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        .intro {
+          min-height: 520px;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .shell {
+          width: min(100% - 22px, 1180px);
+          padding-top: 16px;
+        }
+
+        .topbar,
+        .panel-heading {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .intro,
+        .form-panel,
+        .tracker {
+          padding: 20px;
+        }
+
+        .intro {
+          min-height: 560px;
+        }
+
+        .intro-stat,
+        .grid,
+        .choices {
+          grid-template-columns: 1fr;
+        }
+
+        .dashboard-link,
+        .primary,
+        .secondary,
+        .danger {
+          width: 100%;
+        }
+
+        .actions {
+          align-items: stretch;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div class="brand" aria-label="Coached by Kailee">
+          <div class="brand-mark" aria-hidden="true">CK</div>
+          <div>
+            Coached by Kailee
+            <small>1:1 Fitness Coaching</small>
+          </div>
+        </div>
+        <button class="dashboard-link" type="button" data-scroll-tracker>View applications</button>
+      </header>
+
+      <section class="hero">
+        <div class="intro">
+          <div class="intro-copy">
+            <h1>1:1 coaching for your next era.</h1>
+            <p>
+              Apply for a personalized fitness coaching program built around your goals,
+              schedule, training history, and the support style that keeps you consistent.
+            </p>
+          </div>
+
+          <div class="intro-stat" aria-label="Program highlights">
+            <div>
+              <strong>Custom</strong>
+              <span>Training and nutrition priorities</span>
+            </div>
+            <div>
+              <strong>Weekly</strong>
+              <span>Check-ins and adjustments</span>
+            </div>
+            <div>
+              <strong>1:1</strong>
+              <span>Accountability with Kailee</span>
+            </div>
+          </div>
+        </div>
+
+        <section class="panel form-panel" aria-labelledby="form-title">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Start here</p>
+              <h2 id="form-title">Coaching Application</h2>
+            </div>
+            <div class="count-pill"><span data-count>0</span> saved</div>
+          </div>
+
+          <form id="application-form">
+            <div class="grid">
+              <label>
+                Full name
+                <input name="name" autocomplete="name" required placeholder="Your name">
+              </label>
+              <label>
+                Email
+                <input name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+              </label>
+              <label>
+                Phone
+                <input name="phone" type="tel" autocomplete="tel" placeholder="Optional">
+              </label>
+              <label>
+                Instagram
+                <input name="instagram" placeholder="@username">
+              </label>
+              <label>
+                Main goal
+                <select name="goal" required>
+                  <option value="">Choose one</option>
+                  <option>Fat loss</option>
+                  <option>Muscle gain</option>
+                  <option>Strength</option>
+                  <option>Healthy habits</option>
+                  <option>Body recomposition</option>
+                  <option>Event or photoshoot prep</option>
+                </select>
+              </label>
+              <label>
+                Coaching timeline
+                <select name="timeline" required>
+                  <option value="">Choose one</option>
+                  <option>Ready now</option>
+                  <option>Within 2 weeks</option>
+                  <option>Within 30 days</option>
+                  <option>Just exploring</option>
+                </select>
+              </label>
+              <label>
+                Current training
+                <select name="training" required>
+                  <option value="">Choose one</option>
+                  <option>Beginner</option>
+                  <option>2-3 days per week</option>
+                  <option>4-5 days per week</option>
+                  <option>Advanced</option>
+                  <option>Getting back into it</option>
+                </select>
+              </label>
+              <label>
+                Preferred check-in day
+                <select name="checkin" required>
+                  <option value="">Choose one</option>
+                  <option>Monday</option>
+                  <option>Tuesday</option>
+                  <option>Wednesday</option>
+                  <option>Thursday</option>
+                  <option>Friday</option>
+                  <option>Weekend</option>
+                </select>
+              </label>
+            </div>
+
+            <fieldset class="field-wide">
+              <legend>Commitment level</legend>
+              <div class="choices">
+                <label class="choice">
+                  <input type="radio" name="commitment" value="All in" required>
+                  <span>All in</span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="commitment" value="Need structure">
+                  <span>Need structure</span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="commitment" value="Unsure">
+                  <span>Unsure</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <label>
+              What are you struggling with right now?
+              <textarea name="struggle" required placeholder="Tell Kailee what has felt hard or inconsistent lately."></textarea>
+            </label>
+
+            <label>
+              What would make this program feel successful?
+              <textarea name="success" required placeholder="Share the result, feeling, or lifestyle shift you want most."></textarea>
+            </label>
+
+            <div class="actions">
+              <button class="primary" type="submit">Submit application</button>
+              <button class="secondary" type="reset">Clear form</button>
+              <span class="status" role="status" aria-live="polite"></span>
+            </div>
+          </form>
+        </section>
+      </section>
+
+      <section class="panel tracker" id="applications" aria-labelledby="tracker-title">
+        <div class="tracker-head">
+          <div>
+            <p class="eyebrow">Tracker</p>
+            <h2 id="tracker-title">Saved Applications</h2>
+          </div>
+          <div class="actions">
+            <button class="secondary" type="button" data-export>Export CSV</button>
+            <button class="danger" type="button" data-clear>Clear saved</button>
+          </div>
+        </div>
+        <div class="table-wrap" data-table-wrap></div>
+      </section>
+    </main>
+
+    <script>
+      const storageKey = "coached-by-kailee-applications";
+      const form = document.querySelector("#application-form");
+      const statusText = document.querySelector(".status");
+      const tableWrap = document.querySelector("[data-table-wrap]");
+      const count = document.querySelector("[data-count]");
+      const exportButton = document.querySelector("[data-export]");
+      const clearButton = document.querySelector("[data-clear]");
+      const tracker = document.querySelector("#applications");
+      const intro = document.querySelector(".intro");
+
+      const fields = [
+        "name",
+        "email",
+        "phone",
+        "instagram",
+        "goal",
+        "timeline",
+        "training",
+        "checkin",
+        "commitment",
+        "struggle",
+        "success"
+      ];
+
+      function getApplications() {
+        try {
+          return JSON.parse(localStorage.getItem(storageKey)) || [];
+        } catch {
+          return [];
+        }
+      }
+
+      function saveApplications(applications) {
+        localStorage.setItem(storageKey, JSON.stringify(applications));
+      }
+
+      function detectSidebarPhoto() {
+        const image = new Image();
+        image.onload = () => intro.classList.add("has-photo");
+        image.onerror = () => intro.classList.remove("has-photo");
+        image.src = "23018F0E-C387-4765-A971-AF0089E464F9.jpeg";
+      }
+
+      function escapeHtml(value) {
+        return String(value || "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function renderApplications() {
+        const applications = getApplications();
+        count.textContent = applications.length;
+
+        if (!applications.length) {
+          tableWrap.innerHTML = '<div class="empty">No applications saved yet. Submissions will appear here on this device.</div>';
+          return;
+        }
+
+        const rows = applications
+          .map((application) => `
+            <tr>
+              <td><strong>${escapeHtml(application.name)}</strong><br>${escapeHtml(application.email)}<br>${escapeHtml(application.phone)}</td>
+              <td>${escapeHtml(application.instagram || "-")}</td>
+              <td><span class="tag">${escapeHtml(application.goal)}</span><br>${escapeHtml(application.timeline)}</td>
+              <td>${escapeHtml(application.training)}<br>${escapeHtml(application.checkin)}</td>
+              <td>${escapeHtml(application.commitment)}</td>
+              <td>${escapeHtml(application.submittedAt)}</td>
+            </tr>
+          `)
+          .join("");
+
+        tableWrap.innerHTML = `
+          <table>
+            <thead>
+              <tr>
+                <th>Applicant</th>
+                <th>Instagram</th>
+                <th>Goal</th>
+                <th>Training</th>
+                <th>Commitment</th>
+                <th>Submitted</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        `;
+      }
+
+      function toCsvValue(value) {
+        return `"${String(value || "").replaceAll('"', '""')}"`;
+      }
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const data = new FormData(form);
+        const application = Object.fromEntries(fields.map((field) => [field, data.get(field) || ""]));
+        application.submittedAt = new Date().toLocaleString([], {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "numeric",
+          minute: "2-digit"
+        });
+
+        const applications = [application, ...getApplications()];
+        saveApplications(applications);
+        renderApplications();
+        form.reset();
+        statusText.textContent = "Application saved.";
+        tracker.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
+      form.addEventListener("reset", () => {
+        statusText.textContent = "";
+      });
+
+      exportButton.addEventListener("click", () => {
+        const applications = getApplications();
+        if (!applications.length) {
+          statusText.textContent = "No applications to export yet.";
+          return;
+        }
+
+        const headers = [...fields, "submittedAt"];
+        const rows = applications.map((application) => headers.map((field) => toCsvValue(application[field])).join(","));
+        const csv = [headers.join(","), ...rows].join("\n");
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "coached-by-kailee-applications.csv";
+        link.click();
+        URL.revokeObjectURL(url);
+      });
+
+      clearButton.addEventListener("click", () => {
+        const applications = getApplications();
+        if (!applications.length) {
+          return;
+        }
+
+        const confirmed = window.confirm("Clear all saved applications on this device?");
+        if (!confirmed) {
+          return;
+        }
+
+        saveApplications([]);
+        renderApplications();
+        statusText.textContent = "Saved applications cleared.";
+      });
+
+      document.querySelector("[data-scroll-tracker]").addEventListener("click", () => {
+        tracker.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
+      renderApplications();
+      detectSidebarPhoto();
+    </script>
+  </body>
+</html>
