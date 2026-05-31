@@ -125,12 +125,19 @@
         inset: 0;
         z-index: 2;
         content: "";
-        background: linear-gradient(rgba(127, 35, 79, 0.08), rgba(127, 35, 79, 0.56));
+        background:
+          linear-gradient(
+            rgba(127, 35, 79, 0) 0%,
+            rgba(127, 35, 79, 0) calc(var(--sidebar-copy-height) - 44px),
+            rgba(127, 35, 79, 0.28) var(--sidebar-copy-height),
+            rgba(127, 35, 79, 0.56) 100%
+          );
+        pointer-events: none;
       }
 
       .sidebar-gallery {
         position: absolute;
-        inset: var(--sidebar-copy-height) 0 0;
+        inset: 0;
         z-index: 1;
         background: linear-gradient(145deg, #ffd8e7, #fff8fb);
       }
@@ -145,6 +152,7 @@
         display: block;
         opacity: 0;
         background: linear-gradient(145deg, #ffd8e7, #fff8fb);
+        clip-path: inset(var(--sidebar-copy-height) 0 0 0);
       }
 
       .sidebar-gallery img:nth-child(1) {
@@ -204,7 +212,7 @@
         margin: 0;
         border-radius: 8px 8px 0 0;
         padding: 18px 18px 10px;
-        background: linear-gradient(rgba(127, 35, 79, 0.88), rgba(127, 35, 79, 0.78));
+        background: rgba(127, 35, 79, 0.88);
         opacity: 1;
         text-align: center;
       }
@@ -234,9 +242,9 @@
         border: 1px solid rgba(255, 255, 255, 0.28);
         border-top: 0;
         border-radius: 0 0 8px 8px;
-        background: linear-gradient(rgba(127, 35, 79, 0.78), rgba(127, 35, 79, 0.42));
+        background: rgba(127, 35, 79, 0.88);
         backdrop-filter: blur(14px);
-        box-shadow: 0 22px 44px rgba(127, 35, 79, 0.28);
+        box-shadow: 0 24px 40px rgba(127, 35, 79, 0.2);
       }
 
       .intro-stat div {
@@ -600,6 +608,13 @@
         font-weight: 800;
       }
 
+      .footer-links a:hover,
+      .footer-links a:focus-visible {
+        border-color: var(--pink);
+        background: var(--petal);
+        outline: none;
+      }
+
       @media (max-width: 920px) {
         .hero {
           grid-template-columns: 1fr;
@@ -910,8 +925,8 @@
       <footer class="site-footer">
         <span>Coached by Kailee - 1:1 Fitness Coaching</span>
         <div class="footer-links">
-          <a href="mailto:Kailee.Mcdonald05@gmail.com">Email</a>
-          <a href="https://www.instagram.com/kaileekmcdonald/?hl=en" target="_blank" rel="noreferrer">Instagram</a>
+          <a href="mailto:Kailee.Mcdonald05@gmail.com?subject=Coached%20by%20Kailee%20Application">Email</a>
+          <a href="https://www.instagram.com/kaileekmcdonald/" target="_blank" rel="noopener noreferrer">Instagram</a>
           <a href="#applications">Applications</a>
         </div>
       </footer>
