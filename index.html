@@ -131,9 +131,7 @@
         position: absolute;
         inset: 0;
         z-index: 1;
-        background:
-          var(--sidebar-photo) center top / cover no-repeat,
-          linear-gradient(145deg, #ffd8e7, #fff8fb);
+        background: linear-gradient(145deg, #ffd8e7, #fff8fb);
       }
 
       .sidebar-gallery img {
@@ -141,10 +139,11 @@
         inset: 0;
         width: 100%;
         height: 100%;
-        object-fit: cover;
-        object-position: center top;
+        object-fit: contain;
+        object-position: center center;
         display: block;
         opacity: 0;
+        background: linear-gradient(145deg, #ffd8e7, #fff8fb);
       }
 
       .sidebar-gallery img:nth-child(1) {
@@ -676,9 +675,9 @@
       <section class="hero">
         <div class="intro">
           <div class="sidebar-gallery" aria-hidden="true">
-            <img src="23018F0E-C387-4765-A971-AF0089E464F9.jpeg" alt="">
-            <img src="B91FA611-296E-4251-AECA-33967FCD6DC5.JPG" alt="">
-            <img src="18431ACF-DB34-4725-9BEA-4AE688268D74.jpeg" alt="">
+            <img src="23018F0E-C387-4765-A971-AF0089E464F9.jpeg?v=2" alt="">
+            <img src="B91FA611-296E-4251-AECA-33967FCD6DC5.JPG?v=2" alt="">
+            <img src="18431ACF-DB34-4725-9BEA-4AE688268D74.jpeg?v=2" alt="">
           </div>
           <div class="intro-copy">
             <h1>1:1 coaching for your next era.</h1>
