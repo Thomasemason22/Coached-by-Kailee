@@ -681,45 +681,22 @@
                   Age *
                   <input name="age" type="number" min="13" max="100" required placeholder="Age">
                 </label>
-                <label>
-                  Location *
-                  <input name="location" autocomplete="address-level2" required placeholder="City, state">
-                </label>
-                <label>
-                  Instagram handle
-                  <input name="instagram" placeholder="@username">
-                  <span class="helper">Optional - helps me get to know you a little better</span>
-                </label>
               </div>
             </section>
 
             <section class="form-section" aria-labelledby="your-goals">
               <h3 class="section-title" id="your-goals">Your goals</h3>
-              <fieldset>
-                <legend>What is your main goal? *</legend>
-                <div class="choices">
-                  <label class="choice">
-                    <input type="radio" name="mainGoal" value="Build muscle & tone up" required>
-                    <span>Build muscle & tone up</span>
-                  </label>
-                  <label class="choice">
-                    <input type="radio" name="mainGoal" value="Lose body fat">
-                    <span>Lose body fat</span>
-                  </label>
-                  <label class="choice">
-                    <input type="radio" name="mainGoal" value="Body recomposition">
-                    <span>Body recomposition</span>
-                  </label>
-                  <label class="choice">
-                    <input type="radio" name="mainGoal" value="Improve overall fitness & health">
-                    <span>Improve overall fitness & health</span>
-                  </label>
-                  <label class="choice">
-                    <input type="radio" name="mainGoal" value="Other">
-                    <span>Other</span>
-                  </label>
-                </div>
-              </fieldset>
+              <label>
+                What is your main goal? *
+                <select name="mainGoal" required>
+                  <option value="">Select...</option>
+                  <option>Build muscle & tone up</option>
+                  <option>Lose body fat</option>
+                  <option>Body recomposition</option>
+                  <option>Improve overall fitness & health</option>
+                  <option>Other</option>
+                </select>
+              </label>
 
               <label>
                 Describe your goal in your own words *
@@ -740,27 +717,16 @@
 
             <section class="form-section" aria-labelledby="fitness-history">
               <h3 class="section-title" id="fitness-history">Fitness history</h3>
-              <fieldset>
-                <legend>How would you describe your current fitness level? *</legend>
-                <div class="choices">
-                  <label class="choice">
-                    <input type="radio" name="fitnessLevel" value="Complete beginner" required>
-                    <span>Complete beginner</span>
-                  </label>
-                  <label class="choice">
-                    <input type="radio" name="fitnessLevel" value="Some experience (less than 1 year)">
-                    <span>Some experience (less than 1 year)</span>
-                  </label>
-                  <label class="choice">
-                    <input type="radio" name="fitnessLevel" value="Intermediate (1-3 years)">
-                    <span>Intermediate (1-3 years)</span>
-                  </label>
-                  <label class="choice">
-                    <input type="radio" name="fitnessLevel" value="Advanced (3+ years)">
-                    <span>Advanced (3+ years)</span>
-                  </label>
-                </div>
-              </fieldset>
+              <label>
+                How would you describe your current fitness level? *
+                <select name="fitnessLevel" required>
+                  <option value="">Select...</option>
+                  <option>Complete beginner</option>
+                  <option>Some experience (less than 1 year)</option>
+                  <option>Intermediate (1-3 years)</option>
+                  <option>Advanced (3+ years)</option>
+                </select>
+              </label>
 
               <label>
                 How many days per week can you train? *
@@ -774,27 +740,16 @@
                 </select>
               </label>
 
-              <fieldset>
-                <legend>Where will you be training? *</legend>
-                <div class="choices">
-                  <label class="choice">
-                    <input type="radio" name="trainingLocation" value="Gym" required>
-                    <span>Gym</span>
-                  </label>
-                  <label class="choice">
-                    <input type="radio" name="trainingLocation" value="Home (with equipment)">
-                    <span>Home (with equipment)</span>
-                  </label>
-                  <label class="choice">
-                    <input type="radio" name="trainingLocation" value="Home (no equipment)">
-                    <span>Home (no equipment)</span>
-                  </label>
-                  <label class="choice">
-                    <input type="radio" name="trainingLocation" value="Mix of gym & home">
-                    <span>Mix of gym & home</span>
-                  </label>
-                </div>
-              </fieldset>
+              <label>
+                Where will you be training? *
+                <select name="trainingLocation" required>
+                  <option value="">Select...</option>
+                  <option>Gym</option>
+                  <option>Home (with equipment)</option>
+                  <option>Home (no equipment)</option>
+                  <option>Mix of gym & home</option>
+                </select>
+              </label>
 
               <label>
                 Do you have any injuries or physical limitations?
@@ -804,49 +759,27 @@
 
             <section class="form-section" aria-labelledby="nutrition-lifestyle">
               <h3 class="section-title" id="nutrition-lifestyle">Nutrition & lifestyle</h3>
-              <fieldset>
-                <legend>How would you describe your current diet? *</legend>
-                <div class="choices">
-                  <label class="choice">
-                    <input type="radio" name="diet" value="No restrictions" required>
-                    <span>No restrictions</span>
-                  </label>
-                  <label class="choice">
-                    <input type="radio" name="diet" value="Vegetarian">
-                    <span>Vegetarian</span>
-                  </label>
-                  <label class="choice">
-                    <input type="radio" name="diet" value="Vegan">
-                    <span>Vegan</span>
-                  </label>
-                  <label class="choice">
-                    <input type="radio" name="diet" value="Gluten free">
-                    <span>Gluten free</span>
-                  </label>
-                  <label class="choice">
-                    <input type="radio" name="diet" value="Other dietary restrictions">
-                    <span>Other dietary restrictions</span>
-                  </label>
-                </div>
-              </fieldset>
+              <label>
+                How would you describe your current diet? *
+                <select name="diet" required>
+                  <option value="">Select...</option>
+                  <option>No restrictions</option>
+                  <option>Vegetarian</option>
+                  <option>Vegan</option>
+                  <option>Gluten free</option>
+                  <option>Other dietary restrictions</option>
+                </select>
+              </label>
 
-              <fieldset>
-                <legend>Have you tracked macros before? *</legend>
-                <div class="choices">
-                  <label class="choice">
-                    <input type="radio" name="macros" value="Yes, I'm comfortable with it" required>
-                    <span>Yes, I'm comfortable with it</span>
-                  </label>
-                  <label class="choice">
-                    <input type="radio" name="macros" value="I've tried but need guidance">
-                    <span>I've tried but need guidance</span>
-                  </label>
-                  <label class="choice">
-                    <input type="radio" name="macros" value="No, never tried it">
-                    <span>No, never tried it</span>
-                  </label>
-                </div>
-              </fieldset>
+              <label>
+                Have you tracked macros before? *
+                <select name="macros" required>
+                  <option value="">Select...</option>
+                  <option>Yes, I'm comfortable with it</option>
+                  <option>I've tried but need guidance</option>
+                  <option>No, never tried it</option>
+                </select>
+              </label>
 
               <label>
                 How is your sleep & stress currently?
@@ -940,8 +873,6 @@
         "lastName",
         "email",
         "age",
-        "location",
-        "instagram",
         "mainGoal",
         "goalDescription",
         "timeframe",
@@ -1003,8 +934,6 @@
           .map((application) => `
             <tr>
               <td><strong>${escapeHtml(applicantName(application))}</strong><br>${escapeHtml(application.email)}<br>Age: ${escapeHtml(application.age || "-")}</td>
-              <td>${escapeHtml(application.instagram || "-")}</td>
-              <td>${escapeHtml(application.location || "-")}</td>
               <td><span class="tag">${escapeHtml(application.mainGoal || application.goal)}</span><br>${escapeHtml(application.timeframe || application.timeline)}</td>
               <td>${escapeHtml(application.fitnessLevel || application.training)}<br>${escapeHtml(application.trainingDays || "")}<br>${escapeHtml(application.trainingLocation || "")}</td>
               <td>${escapeHtml(application.diet || "-")}<br>${escapeHtml(application.macros || "")}</td>
@@ -1019,8 +948,6 @@
             <thead>
               <tr>
                 <th>Applicant</th>
-                <th>Instagram</th>
-                <th>Location</th>
                 <th>Goal</th>
                 <th>Fitness</th>
                 <th>Nutrition</th>
