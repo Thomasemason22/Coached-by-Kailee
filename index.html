@@ -800,7 +800,7 @@
         .intro {
           min-height: 660px;
           padding: 10px 14px 16px;
-          --sidebar-copy-height: 164px;
+          --sidebar-copy-height: 126px;
         }
 
         .intro::before {
@@ -815,7 +815,7 @@
         }
 
         .sidebar-gallery {
-          inset: calc(var(--sidebar-copy-height) - 10px) 0 0;
+          inset: var(--sidebar-copy-height) 0 0;
         }
 
         .sidebar-gallery img:nth-child(1),
@@ -828,17 +828,15 @@
         }
 
         .intro h1 {
-          font-size: clamp(1.55rem, 7.6vw, 2.2rem);
+          font-size: clamp(1.35rem, 6.8vw, 1.9rem);
         }
 
         .intro p {
-          margin-top: 8px;
-          font-size: 0.76rem;
-          line-height: 1.34;
+          display: none;
         }
 
         .intro-copy {
-          padding: 10px 10px 7px;
+          padding: 10px 10px 8px;
         }
 
         .intro-stat {
