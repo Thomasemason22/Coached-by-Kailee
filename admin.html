@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coached by Kailee | Admin</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #221820;
+        --muted: #776874;
+        --line: #ead9df;
+        --paper: #fbf7f8;
+        --white: #ffffff;
+        --pink: #e9578e;
+        --rose: #b92f6b;
+        --berry: #7f234f;
+        --sage: #e6f2ec;
+        --shadow: 0 18px 48px rgba(66, 42, 54, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background:
+          linear-gradient(90deg, rgba(127, 35, 79, 0.06) 1px, transparent 1px),
+          linear-gradient(rgba(127, 35, 79, 0.05) 1px, transparent 1px),
+          #fffafb;
+        background-size: 32px 32px;
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      .shell {
+        width: min(1240px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 24px 0 44px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 22px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 900;
+      }
+
+      .brand-mark {
+        display: grid;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border-radius: 8px;
+        color: white;
+        background: linear-gradient(145deg, var(--pink), var(--berry));
+        box-shadow: 0 12px 28px rgba(127, 35, 79, 0.24);
+      }
+
+      .brand small {
+        display: block;
+        margin-top: 2px;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
+      .top-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      a,
+      .text-link {
+        color: var(--berry);
+        font-weight: 850;
+        text-decoration: none;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: var(--shadow);
+      }
+
+      .login {
+        display: grid;
+        max-width: 520px;
+        gap: 18px;
+        margin: 72px auto;
+        padding: 28px;
+      }
+
+      .login h1,
+      .dashboard-head h1 {
+        margin: 0;
+        font-size: clamp(1.9rem, 4vw, 3rem);
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      .login p,
+      .dashboard-head p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+        font-weight: 650;
+      }
+
+      label {
+        display: grid;
+        gap: 8px;
+        color: var(--berry);
+        font-size: 0.83rem;
+        font-weight: 850;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        min-height: 46px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 11px 12px;
+        color: var(--ink);
+        background: white;
+        outline: none;
+      }
+
+      textarea {
+        min-height: 118px;
+        resize: vertical;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: var(--pink);
+        box-shadow: 0 0 0 4px rgba(233, 87, 142, 0.13);
+      }
+
+      .primary,
+      .secondary,
+      .danger {
+        display: inline-flex;
+        min-height: 46px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        padding: 0 16px;
+        font-weight: 900;
+      }
+
+      .primary {
+        border: 0;
+        color: white;
+        background: linear-gradient(145deg, var(--pink), var(--rose));
+      }
+
+      .secondary {
+        border: 1px solid var(--line);
+        color: var(--berry);
+        background: white;
+      }
+
+      .danger {
+        border: 1px solid #efb8c8;
+        color: #9b1b49;
+        background: #fff0f5;
+      }
+
+      .status {
+        min-height: 24px;
+        color: var(--rose);
+        font-weight: 800;
+      }
+
+      .dashboard {
+        display: none;
+        gap: 18px;
+      }
+
+      .dashboard.is-visible,
+      .login.is-visible {
+        display: grid;
+      }
+
+      .login:not(.is-visible) {
+        display: none;
+      }
+
+      .dashboard-head {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 26px;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .metric {
+        padding: 18px;
+      }
+
+      .metric strong {
+        display: block;
+        font-size: 1.8rem;
+      }
+
+      .metric span {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 850;
+        text-transform: uppercase;
+      }
+
+      .toolbar {
+        display: grid;
+        grid-template-columns: 1fr 220px auto;
+        gap: 12px;
+        padding: 18px;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        min-width: 940px;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        border-bottom: 1px solid var(--line);
+        padding: 14px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        color: var(--berry);
+        background: #fff2f7;
+        font-size: 0.74rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      td {
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      td strong {
+        color: var(--ink);
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 5px 9px;
+        color: #2f6148;
+        background: var(--sage);
+        font-size: 0.78rem;
+        font-weight: 900;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.55fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .detail {
+        position: sticky;
+        top: 18px;
+        display: grid;
+        gap: 14px;
+        padding: 20px;
+      }
+
+      .detail h2 {
+        margin: 0;
+        font-size: 1.35rem;
+      }
+
+      .detail-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .detail-item {
+        border-top: 1px solid var(--line);
+        padding-top: 12px;
+      }
+
+      .detail-item span {
+        display: block;
+        color: var(--berry);
+        font-size: 0.72rem;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .detail-item p {
+        margin: 5px 0 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .empty {
+        padding: 28px;
+        color: var(--muted);
+        text-align: center;
+        font-weight: 750;
+      }
+
+      @media (max-width: 880px) {
+        .dashboard-head,
+        .topbar {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .metrics,
+        .toolbar,
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .detail {
+          position: static;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">CK</div>
+          <div>
+            Coached by Kailee
+            <small>Admin dashboard</small>
+          </div>
+        </div>
+        <div class="top-actions">
+          <a class="secondary" href="index.html">Client application</a>
+          <button class="danger" type="button" data-signout>Sign out</button>
+        </div>
+      </header>
+
+      <section class="panel login is-visible" data-login>
+        <div>
+          <h1>Admin access</h1>
+          <p>Enter Kailee's approved admin email. Supabase will send a secure sign-in link.</p>
+        </div>
+        <label>
+          Email
+          <input data-email type="email" autocomplete="email" placeholder="Kailee.Mcdonald05@gmail.com">
+        </label>
+        <button class="primary" type="button" data-login-button>Send secure link</button>
+        <div class="status" data-login-status></div>
+      </section>
+
+      <section class="dashboard" data-dashboard>
+        <section class="panel dashboard-head">
+          <div>
+            <h1>Applications</h1>
+            <p>Review coaching applications, filter leads, export CSV, and add internal notes.</p>
+          </div>
+          <button class="secondary" type="button" data-refresh>Refresh</button>
+        </section>
+
+        <section class="metrics">
+          <div class="panel metric"><strong data-total>0</strong><span>Total</span></div>
+          <div class="panel metric"><strong data-new>0</strong><span>New</span></div>
+          <div class="panel metric"><strong data-reviewing>0</strong><span>Reviewing</span></div>
+          <div class="panel metric"><strong data-accepted>0</strong><span>Accepted</span></div>
+        </section>
+
+        <section class="panel toolbar">
+          <input data-search placeholder="Search name, email, goal, commitment">
+          <select data-status-filter>
+            <option value="">All statuses</option>
+            <option value="new">New</option>
+            <option value="reviewing">Reviewing</option>
+            <option value="accepted">Accepted</option>
+            <option value="waitlist">Waitlist</option>
+            <option value="declined">Declined</option>
+          </select>
+          <button class="secondary" type="button" data-export>Export CSV</button>
+        </section>
+
+        <div class="layout">
+          <section class="panel table-wrap" data-table></section>
+
+          <aside class="panel detail" data-detail>
+            <h2>Select an application</h2>
+            <p class="status">Choose a row to see the full intake response and update status.</p>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+      const supabaseUrl = "https://ibpdrosleqwixhojkgzi.supabase.co";
+      const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlicGRyb3NsZXF3aXhob2prZ3ppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMjUxOTAsImV4cCI6MjA5NTgwMTE5MH0.k5rcH3I8Eoi8K85d7qFNMeiX0blvUGFHQBWPPYJJlcY";
+      const db = supabase.createClient(supabaseUrl, supabaseKey);
+
+      const loginPanel = document.querySelector("[data-login]");
+      const dashboard = document.querySelector("[data-dashboard]");
+      const emailInput = document.querySelector("[data-email]");
+      const loginButton = document.querySelector("[data-login-button]");
+      const loginStatus = document.querySelector("[data-login-status]");
+      const signoutButton = document.querySelector("[data-signout]");
+      const refreshButton = document.querySelector("[data-refresh]");
+      const exportButton = document.querySelector("[data-export]");
+      const searchInput = document.querySelector("[data-search]");
+      const statusFilter = document.querySelector("[data-status-filter]");
+      const table = document.querySelector("[data-table]");
+      const detail = document.querySelector("[data-detail]");
+      const metrics = {
+        total: document.querySelector("[data-total]"),
+        new: document.querySelector("[data-new]"),
+        reviewing: document.querySelector("[data-reviewing]"),
+        accepted: document.querySelector("[data-accepted]")
+      };
+
+      let applications = [];
+      let selectedId = "";
+
+      function escapeHtml(value) {
+        return String(value || "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function formatDate(value) {
+        if (!value) {
+          return "-";
+        }
+
+        return new Date(value).toLocaleString([], {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+          hour: "numeric",
+          minute: "2-digit"
+        });
+      }
+
+      function applicantName(application) {
+        return `${application.first_name || ""} ${application.last_name || ""}`.trim();
+      }
+
+      function filteredApplications() {
+        const query = searchInput.value.trim().toLowerCase();
+        const status = statusFilter.value;
+
+        return applications.filter((application) => {
+          const haystack = [
+            applicantName(application),
+            application.email,
+            application.main_goal,
+            application.goal_description,
+            application.commitment
+          ].join(" ").toLowerCase();
+
+          return (!query || haystack.includes(query)) && (!status || application.status === status);
+        });
+      }
+
+      function renderMetrics() {
+        metrics.total.textContent = applications.length;
+        metrics.new.textContent = applications.filter((item) => item.status === "new").length;
+        metrics.reviewing.textContent = applications.filter((item) => item.status === "reviewing").length;
+        metrics.accepted.textContent = applications.filter((item) => item.status === "accepted").length;
+      }
+
+      function renderTable() {
+        const rows = filteredApplications();
+
+        if (!rows.length) {
+          table.innerHTML = '<div class="empty">No applications match this view.</div>';
+          return;
+        }
+
+        table.innerHTML = `
+          <table>
+            <thead>
+              <tr>
+                <th>Applicant</th>
+                <th>Goal</th>
+                <th>Training</th>
+                <th>Nutrition</th>
+                <th>Status</th>
+                <th>Submitted</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rows.map((application) => `
+                <tr data-row="${application.id}">
+                  <td><strong>${escapeHtml(applicantName(application))}</strong><br>${escapeHtml(application.email)}<br>Age: ${escapeHtml(application.age)}</td>
+                  <td><span class="tag">${escapeHtml(application.main_goal)}</span><br>${escapeHtml(application.timeframe)}</td>
+                  <td>${escapeHtml(application.fitness_level)}<br>${escapeHtml(application.training_days)}<br>${escapeHtml(application.training_location)}</td>
+                  <td>${escapeHtml(application.diet)}<br>${escapeHtml(application.macros)}</td>
+                  <td><span class="tag">${escapeHtml(application.status)}</span></td>
+                  <td>${escapeHtml(formatDate(application.created_at))}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        `;
+
+        table.querySelectorAll("[data-row]").forEach((row) => {
+          row.addEventListener("click", () => {
+            selectedId = row.dataset.row;
+            renderDetail();
+          });
+        });
+      }
+
+      function detailItem(label, value) {
+        return `
+          <div class="detail-item">
+            <span>${escapeHtml(label)}</span>
+            <p>${escapeHtml(value || "-")}</p>
+          </div>
+        `;
+      }
+
+      function renderDetail() {
+        const application = applications.find((item) => item.id === selectedId);
+
+        if (!application) {
+          detail.innerHTML = '<h2>Select an application</h2><p class="status">Choose a row to see the full intake response and update status.</p>';
+          return;
+        }
+
+        detail.innerHTML = `
+          <h2>${escapeHtml(applicantName(application))}</h2>
+          <label>
+            Status
+            <select data-detail-status>
+              ${["new", "reviewing", "accepted", "waitlist", "declined"].map((status) => `
+                <option value="${status}" ${application.status === status ? "selected" : ""}>${status}</option>
+              `).join("")}
+            </select>
+          </label>
+          <label>
+            Admin notes
+            <textarea data-detail-notes placeholder="Private notes for Kailee">${escapeHtml(application.admin_notes || "")}</textarea>
+          </label>
+          <button class="primary" type="button" data-save-detail>Save updates</button>
+          <div class="status" data-detail-status-text></div>
+          <div class="detail-list">
+            ${detailItem("Goal", application.goal_description)}
+            ${detailItem("Timeframe", application.timeframe)}
+            ${detailItem("Training", `${application.fitness_level} | ${application.training_days} | ${application.training_location}`)}
+            ${detailItem("Limitations", application.limitations)}
+            ${detailItem("Nutrition", `${application.diet} | ${application.macros} | ${application.sleep_stress || "Sleep/stress not provided"}`)}
+            ${detailItem("Past obstacles", application.past_obstacles)}
+            ${detailItem("Why coaching", application.coach_reason)}
+            ${detailItem("Commitment", application.commitment)}
+            ${detailItem("Additional notes", application.additional_notes)}
+          </div>
+        `;
+
+        detail.querySelector("[data-save-detail]").addEventListener("click", async () => {
+          const statusText = detail.querySelector("[data-detail-status-text]");
+          const updates = {
+            status: detail.querySelector("[data-detail-status]").value,
+            admin_notes: detail.querySelector("[data-detail-notes]").value
+          };
+
+          statusText.textContent = "Saving...";
+          const { error } = await db
+            .from("coaching_applications")
+            .update(updates)
+            .eq("id", application.id);
+
+          if (error) {
+            statusText.textContent = "Could not save updates.";
+            return;
+          }
+
+          Object.assign(application, updates);
+          statusText.textContent = "Updates saved.";
+          renderMetrics();
+          renderTable();
+        });
+      }
+
+      async function loadApplications() {
+        table.innerHTML = '<div class="empty">Loading applications...</div>';
+        const { data, error } = await db
+          .from("coaching_applications")
+          .select("*")
+          .order("created_at", { ascending: false });
+
+        if (error) {
+          table.innerHTML = '<div class="empty">Could not load applications. Make sure you are signed in with an approved admin email.</div>';
+          return;
+        }
+
+        applications = data || [];
+        renderMetrics();
+        renderTable();
+        renderDetail();
+      }
+
+      async function showForSession() {
+        const { data } = await db.auth.getSession();
+        const signedIn = Boolean(data.session);
+
+        loginPanel.classList.toggle("is-visible", !signedIn);
+        dashboard.classList.toggle("is-visible", signedIn);
+        signoutButton.style.display = signedIn ? "inline-flex" : "none";
+
+        if (signedIn) {
+          await loadApplications();
+        }
+      }
+
+      function toCsvValue(value) {
+        return `"${String(value || "").replaceAll('"', '""')}"`;
+      }
+
+      loginButton.addEventListener("click", async () => {
+        const email = emailInput.value.trim().toLowerCase();
+        if (!email) {
+          loginStatus.textContent = "Enter the admin email first.";
+          return;
+        }
+
+        loginStatus.textContent = "Sending secure link...";
+        const { error } = await db.auth.signInWithOtp({
+          email,
+          options: {
+            emailRedirectTo: window.location.href
+          }
+        });
+
+        loginStatus.textContent = error
+          ? "Could not send the link. Check the email or Supabase auth settings."
+          : "Check your email for the secure sign-in link.";
+      });
+
+      signoutButton.addEventListener("click", async () => {
+        await db.auth.signOut();
+        applications = [];
+        selectedId = "";
+        await showForSession();
+      });
+
+      refreshButton.addEventListener("click", loadApplications);
+      searchInput.addEventListener("input", renderTable);
+      statusFilter.addEventListener("change", renderTable);
+
+      exportButton.addEventListener("click", () => {
+        const headers = [
+          "created_at",
+          "first_name",
+          "last_name",
+          "email",
+          "age",
+          "main_goal",
+          "goal_description",
+          "timeframe",
+          "fitness_level",
+          "training_days",
+          "training_location",
+          "diet",
+          "macros",
+          "commitment",
+          "status",
+          "admin_notes"
+        ];
+        const rows = filteredApplications().map((application) => headers.map((field) => toCsvValue(application[field])).join(","));
+        const csv = [headers.join(","), ...rows].join("\n");
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "coached-by-kailee-applications.csv";
+        link.click();
+        URL.revokeObjectURL(url);
+      });
+
+      db.auth.onAuthStateChange(() => {
+        showForSession();
+      });
+
+      showForSession();
+    </script>
+  </body>
+</html>

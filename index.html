@@ -89,6 +89,9 @@
       }
 
       .dashboard-link {
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
         border: 1px solid var(--line);
         border-radius: 999px;
         padding: 10px 14px;
@@ -413,6 +416,19 @@
         font-size: 0.85rem;
         font-weight: 800;
         white-space: nowrap;
+      }
+
+      .admin-link {
+        color: var(--rose);
+        font-size: 0.82rem;
+        font-weight: 850;
+        text-decoration: none;
+      }
+
+      .admin-link:hover,
+      .admin-link:focus-visible {
+        color: var(--berry);
+        outline: none;
       }
 
       .progress-wrap {
@@ -914,7 +930,7 @@
             <small>1:1 Fitness Coaching</small>
           </div>
         </div>
-        <button class="dashboard-link" type="button" data-scroll-tracker>View applications</button>
+        <a class="dashboard-link" href="admin.html">Admin dashboard</a>
       </header>
 
       <section class="hero">
@@ -959,7 +975,7 @@
               <p class="eyebrow">Start here</p>
               <h2 id="form-title">Coaching Application</h2>
             </div>
-            <div class="count-pill"><span data-count>0</span> saved</div>
+            <a class="admin-link" href="admin.html">Admin</a>
           </div>
 
           <form id="application-form">
@@ -1151,41 +1167,23 @@
         </section>
       </section>
 
-      <section class="panel tracker" id="applications" aria-labelledby="tracker-title">
-        <div class="tracker-head">
-          <div>
-            <p class="eyebrow">Tracker</p>
-            <h2 id="tracker-title">Saved Applications</h2>
-          </div>
-          <div class="actions">
-            <button class="secondary" type="button" data-export>Export CSV</button>
-            <button class="danger" type="button" data-clear>Clear saved</button>
-          </div>
-        </div>
-        <div class="table-wrap" data-table-wrap></div>
-      </section>
-
       <footer class="site-footer">
         <span>Coached by Kailee - 1:1 Fitness Coaching</span>
         <div class="footer-links">
           <a href="mailto:Kailee.Mcdonald05@gmail.com?subject=Coached%20by%20Kailee%20Application">Email Kailee</a>
           <a href="https://www.instagram.com/kaileekmcdonald/" target="_blank" rel="noopener noreferrer">Instagram</a>
-          <a href="#applications">Saved applications</a>
+          <a href="admin.html">Admin</a>
         </div>
       </footer>
     </main>
 
     <script>
-      const storageKey = "coached-by-kailee-applications";
+      const supabaseUrl = "https://ibpdrosleqwixhojkgzi.supabase.co";
+      const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlicGRyb3NsZXF3aXhob2prZ3ppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMjUxOTAsImV4cCI6MjA5NTgwMTE5MH0.k5rcH3I8Eoi8K85d7qFNMeiX0blvUGFHQBWPPYJJlcY";
       const form = document.querySelector("#application-form");
       const statusText = document.querySelector(".status");
-      const tableWrap = document.querySelector("[data-table-wrap]");
-      const count = document.querySelector("[data-count]");
-      const exportButton = document.querySelector("[data-export]");
-      const clearButton = document.querySelector("[data-clear]");
-      const tracker = document.querySelector("#applications");
       const successBox = document.querySelector("[data-success]");
-      const submitButton = form.querySelector(".primary");
+      const submitButtons = form.querySelectorAll('button[type="submit"]');
       const progressFill = document.querySelector("[data-progress-fill]");
       const progressLabel = document.querySelector("[data-progress-label]");
       const newApplicationButton = document.querySelector("[data-new-application]");
@@ -1212,72 +1210,8 @@
         "additionalNotes"
       ];
 
-      function getApplications() {
-        try {
-          return JSON.parse(localStorage.getItem(storageKey)) || [];
-        } catch {
-          return [];
-        }
-      }
-
-      function saveApplications(applications) {
-        localStorage.setItem(storageKey, JSON.stringify(applications));
-      }
-
-      function escapeHtml(value) {
-        return String(value || "")
-          .replaceAll("&", "&amp;")
-          .replaceAll("<", "&lt;")
-          .replaceAll(">", "&gt;")
-          .replaceAll('"', "&quot;")
-          .replaceAll("'", "&#039;");
-      }
-
       function applicantName(application) {
         return `${application.firstName || ""} ${application.lastName || ""}`.trim() || application.name || "";
-      }
-
-      function renderApplications() {
-        const applications = getApplications();
-        count.textContent = applications.length;
-
-        if (!applications.length) {
-          tableWrap.innerHTML = '<div class="empty">No applications saved yet. Submissions will appear here on this device.</div>';
-          return;
-        }
-
-        const rows = applications
-          .map((application) => `
-            <tr>
-              <td><strong>${escapeHtml(applicantName(application))}</strong><br>${escapeHtml(application.email)}<br>Age: ${escapeHtml(application.age || "-")}</td>
-              <td><span class="tag">${escapeHtml(application.mainGoal || application.goal)}</span><br>${escapeHtml(application.timeframe || application.timeline)}</td>
-              <td>${escapeHtml(application.fitnessLevel || application.training)}<br>${escapeHtml(application.trainingDays || "")}<br>${escapeHtml(application.trainingLocation || "")}</td>
-              <td>${escapeHtml(application.diet || "-")}<br>${escapeHtml(application.macros || "")}</td>
-              <td>${escapeHtml(application.commitment)}</td>
-              <td>${escapeHtml(application.submittedAt)}</td>
-            </tr>
-          `)
-          .join("");
-
-        tableWrap.innerHTML = `
-          <table>
-            <thead>
-              <tr>
-                <th>Applicant</th>
-                <th>Goal</th>
-                <th>Fitness</th>
-                <th>Nutrition</th>
-                <th>Commitment</th>
-                <th>Submitted</th>
-              </tr>
-            </thead>
-            <tbody>${rows}</tbody>
-          </table>
-        `;
-      }
-
-      function toCsvValue(value) {
-        return `"${String(value || "").replaceAll('"', '""')}"`;
       }
 
       function updateProgress() {
@@ -1295,6 +1229,46 @@
 
         progressFill.style.width = `${percent}%`;
         progressLabel.textContent = `${percent}% complete`;
+      }
+
+      function toDatabaseApplication(application) {
+        return {
+          first_name: application.firstName.trim(),
+          last_name: application.lastName.trim(),
+          email: application.email.trim().toLowerCase(),
+          age: Number(application.age),
+          main_goal: application.mainGoal,
+          goal_description: application.goalDescription,
+          timeframe: application.timeframe,
+          fitness_level: application.fitnessLevel,
+          training_days: application.trainingDays,
+          training_location: application.trainingLocation,
+          limitations: application.limitations,
+          diet: application.diet,
+          macros: application.macros,
+          sleep_stress: application.sleepStress,
+          past_obstacles: application.pastObstacles,
+          coach_reason: application.coachReason,
+          commitment: application.commitment,
+          additional_notes: application.additionalNotes
+        };
+      }
+
+      async function saveDatabaseApplication(application) {
+        const response = await fetch(`${supabaseUrl}/rest/v1/coaching_applications`, {
+          method: "POST",
+          headers: {
+            apikey: supabaseKey,
+            Authorization: `Bearer ${supabaseKey}`,
+            "Content-Type": "application/json",
+            Prefer: "return=minimal"
+          },
+          body: JSON.stringify(toDatabaseApplication(application))
+        });
+
+        if (!response.ok) {
+          throw new Error(await response.text());
+        }
       }
 
       async function sendExternalApplication(application) {
@@ -1331,19 +1305,30 @@
           minute: "2-digit"
         });
 
-        const applications = [application, ...getApplications()];
-        saveApplications(applications);
-        renderApplications();
         statusText.textContent = "Saving application...";
-        submitButton.disabled = true;
+        submitButtons.forEach((button) => {
+          button.disabled = true;
+        });
+
+        try {
+          await saveDatabaseApplication(application);
+          statusText.textContent = "Application saved.";
+        } catch {
+          statusText.textContent = "Something went wrong saving your application. Please try again.";
+          submitButtons.forEach((button) => {
+            button.disabled = false;
+          });
+          return;
+        }
 
         try {
           await sendExternalApplication(application);
-          statusText.textContent = "Application sent and saved.";
         } catch {
-          statusText.textContent = "Application saved here. External delivery needs activation.";
+          statusText.textContent = "Application saved. Email delivery may need activation.";
         } finally {
-          submitButton.disabled = false;
+          submitButtons.forEach((button) => {
+            button.disabled = false;
+          });
         }
 
         form.reset();
@@ -1370,46 +1355,6 @@
         updateProgress();
       });
 
-      exportButton.addEventListener("click", () => {
-        const applications = getApplications();
-        if (!applications.length) {
-          statusText.textContent = "No applications to export yet.";
-          return;
-        }
-
-        const headers = [...fields, "submittedAt"];
-        const rows = applications.map((application) => headers.map((field) => toCsvValue(application[field])).join(","));
-        const csv = [headers.join(","), ...rows].join("\n");
-        const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "coached-by-kailee-applications.csv";
-        link.click();
-        URL.revokeObjectURL(url);
-      });
-
-      clearButton.addEventListener("click", () => {
-        const applications = getApplications();
-        if (!applications.length) {
-          return;
-        }
-
-        const confirmed = window.confirm("Clear all saved applications on this device?");
-        if (!confirmed) {
-          return;
-        }
-
-        saveApplications([]);
-        renderApplications();
-        statusText.textContent = "Saved applications cleared.";
-      });
-
-      document.querySelector("[data-scroll-tracker]").addEventListener("click", () => {
-        tracker.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-
-      renderApplications();
       updateProgress();
     </script>
   </body>
