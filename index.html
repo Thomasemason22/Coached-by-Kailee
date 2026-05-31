@@ -162,6 +162,7 @@
         object-fit: cover;
         object-position: center 62%;
         opacity: 1;
+        animation: galleryFadeFirst 24s infinite;
       }
 
       .sidebar-gallery img:nth-child(2) {
@@ -202,6 +203,23 @@
 
       .slide-dots span:nth-child(3) {
         animation: dotThree 24s infinite;
+      }
+
+      @keyframes galleryFadeFirst {
+        0%,
+        30% {
+          opacity: 1;
+        }
+
+        36%,
+        96% {
+          opacity: 0;
+        }
+
+        99%,
+        100% {
+          opacity: 1;
+        }
       }
 
       @keyframes galleryFadeSecond {
@@ -782,7 +800,7 @@
         .intro {
           min-height: 660px;
           padding: 10px 14px 16px;
-          --sidebar-copy-height: 198px;
+          --sidebar-copy-height: 164px;
         }
 
         .intro::before {
@@ -797,7 +815,7 @@
         }
 
         .sidebar-gallery {
-          inset: calc(var(--sidebar-copy-height) - 18px) 0 0;
+          inset: calc(var(--sidebar-copy-height) - 10px) 0 0;
         }
 
         .sidebar-gallery img:nth-child(1),
@@ -810,17 +828,17 @@
         }
 
         .intro h1 {
-          font-size: clamp(1.8rem, 8.8vw, 2.55rem);
+          font-size: clamp(1.55rem, 7.6vw, 2.2rem);
         }
 
         .intro p {
-          margin-top: 10px;
-          font-size: 0.84rem;
-          line-height: 1.42;
+          margin-top: 8px;
+          font-size: 0.76rem;
+          line-height: 1.34;
         }
 
         .intro-copy {
-          padding: 12px 12px 8px;
+          padding: 10px 10px 7px;
         }
 
         .intro-stat {
@@ -828,15 +846,15 @@
         }
 
         .intro-stat div {
-          padding: 8px 6px;
+          padding: 6px 5px;
         }
 
         .intro-stat strong {
-          font-size: 0.92rem;
+          font-size: 0.82rem;
         }
 
         .intro-stat span {
-          font-size: 0.6rem;
+          font-size: 0.54rem;
           line-height: 1.25;
         }
 
@@ -904,9 +922,9 @@
       <section class="hero">
         <div class="intro">
           <div class="sidebar-gallery" aria-hidden="true">
-            <img src="23018F0E-C387-4765-A971-AF0089E464F9.jpeg?v=3" alt="">
-            <img src="B91FA611-296E-4251-AECA-33967FCD6DC5.JPG?v=3" alt="">
-            <img src="18431ACF-DB34-4725-9BEA-4AE688268D74.jpeg?v=3" alt="">
+            <img src="23018F0E-C387-4765-A971-AF0089E464F9.jpeg?v=4" alt="">
+            <img src="B91FA611-296E-4251-AECA-33967FCD6DC5.JPG?v=4" alt="">
+            <img src="18431ACF-DB34-4725-9BEA-4AE688268D74.jpeg?v=4" alt="">
           </div>
           <div class="slide-dots" aria-hidden="true">
             <span></span>
