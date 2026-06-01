@@ -217,6 +217,51 @@ h3 {
   box-shadow: 0 16px 42px rgba(127, 35, 79, 0.08);
 }
 
+.story-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.story-copy {
+  display: grid;
+  gap: 14px;
+}
+
+.story-copy p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.milestone-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.milestone-list li {
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+
+.milestone-list strong {
+  display: block;
+  color: var(--berry);
+  font-size: 1rem;
+}
+
+.milestone-list span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
 .card p,
 .quote p,
 .price-card p,
@@ -291,6 +336,7 @@ h3 {
 @media (max-width: 840px) {
   .topbar,
   .section-head,
+  .story-grid,
   .photo-band,
   .grid,
   .grid.two {
