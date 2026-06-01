@@ -35,7 +35,7 @@ a {
 .shell {
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 18px 0 44px;
+  padding: 10px 0 44px;
 }
 
 .topbar,
@@ -48,7 +48,7 @@ a {
 }
 
 .topbar {
-  padding: 10px 0 18px;
+  padding: 8px 0 12px;
 }
 
 .brand {
@@ -122,7 +122,7 @@ a {
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-  min-height: 560px;
+  min-height: 430px;
   overflow: hidden;
   border-radius: 8px;
   border: 1px solid rgba(236, 209, 221, 0.9);
@@ -132,7 +132,7 @@ a {
 
 .hero::after {
   content: "";
-  min-height: 560px;
+  min-height: 430px;
   background:
     linear-gradient(180deg, rgba(255, 231, 240, 0.12), rgba(127, 35, 79, 0.18)),
     var(--hero-image) center / cover no-repeat,
@@ -142,9 +142,9 @@ a {
 .hero-content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   max-width: 620px;
-  padding: 44px;
+  padding: 34px;
   color: var(--ink);
 }
 
@@ -450,12 +450,12 @@ h3 {
   }
 
   .hero::after {
-    min-height: 340px;
+    min-height: 250px;
     order: -1;
   }
 
   .hero-content {
-    padding: 28px;
+    padding: 22px;
   }
 
   .about-photo-grid.three {
@@ -466,7 +466,7 @@ h3 {
 @media (max-width: 560px) {
   .shell {
     width: min(100% - 22px, 1180px);
-    padding-top: 16px;
+    padding-top: 10px;
   }
 
   .hero {
@@ -474,7 +474,7 @@ h3 {
   }
 
   .hero::after {
-    min-height: 280px;
+    min-height: 220px;
   }
 
   .hero-content,
