@@ -87,6 +87,32 @@
         font-weight: 600;
       }
 
+      .site-nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px;
+      }
+
+      .site-nav a {
+        border: 1px solid rgba(236, 209, 221, 0.9);
+        border-radius: 999px;
+        padding: 9px 12px;
+        color: var(--berry);
+        background: rgba(255, 255, 255, 0.62);
+        font-size: 0.9rem;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .site-nav a[aria-current="page"],
+      .site-nav a:hover,
+      .site-nav a:focus-visible {
+        border-color: var(--pink);
+        background: var(--petal);
+        outline: none;
+      }
+
       .hero {
         display: grid;
         grid-template-columns: 0.9fr 1.1fr;
@@ -793,6 +819,10 @@
           flex-direction: column;
         }
 
+        .site-nav {
+          justify-content: flex-start;
+        }
+
         .intro,
         .form-panel,
         .tracker {
@@ -915,6 +945,12 @@
             <small>1:1 Fitness Coaching</small>
           </div>
         </div>
+        <nav class="site-nav" aria-label="Main navigation">
+          <a href="home.html">Home</a>
+          <a href="program.html">Program</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="index.html" aria-current="page">Apply</a>
+        </nav>
       </header>
 
       <section class="hero">
@@ -1154,6 +1190,9 @@
       <footer class="site-footer">
         <span>Coached by Kailee - 1:1 Fitness Coaching</span>
         <div class="footer-links">
+          <a href="home.html">Home</a>
+          <a href="program.html">Program</a>
+          <a href="pricing.html">Pricing</a>
           <a href="mailto:kailee.mcdonald@coachedbykailee.com?subject=Coached%20by%20Kailee%20Application">Email Kailee</a>
           <a href="https://www.instagram.com/kaileekmcdonald/" target="_blank" rel="noopener noreferrer">Instagram</a>
           <a href="https://coachedbykailee.com/admin.html">Admin</a>
