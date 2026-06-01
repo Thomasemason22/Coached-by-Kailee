@@ -255,6 +255,10 @@ h3 {
   margin-top: 16px;
 }
 
+.about-photo-grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .about-photo-grid figure {
   position: relative;
   overflow: hidden;
@@ -273,7 +277,8 @@ h3 {
   display: block;
 }
 
-.about-photo-grid figure:first-child img {
+.about-photo-grid figure:first-child img,
+.about-photo-grid figure:nth-child(2) img {
   object-position: center center;
 }
 
